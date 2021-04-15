@@ -1,4 +1,4 @@
-完整项目（包括数据集和w2v模型）：https://pan.baidu.com/s/1Ncj9AMAK0Pc9tKGWDjMNwA   \t 提取码：4ell  
+完整项目（包括数据集和w2v模型）：https://pan.baidu.com/s/1Ncj9AMAK0Pc9tKGWDjMNwA         提取码：4ell  
 已跑通build_data里的三个文件。
 
 1.在utils.config里添加初始路径
