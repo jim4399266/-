@@ -34,8 +34,14 @@ def preprocess(train_data_path, test_data_path):
     if os.path.exists(config.train_seg_path) and \
         os.path.exists(config.train_seg_path) and \
         os.path.exists(config.merger_seg_path):
-        train_df = pd.read_csv(config.train_seg_path, header=None)
-        test_df = pd.read_csv(config.train_seg_path, header=None)
+        train_df = pd.read_csv(config.train_seg_path)
+        test_df = pd.read_csv(config.train_seg_path)
+
+        train_df.dropna(subset=['Report'], inplace=True)
+        test_df.dropna(subset=['Report'], inplace=True)
+
+        train_df.fillna('', inplace=True)
+        test_df.fillna('', inplace=True)
 
     else:
         # 1.加载数据
@@ -60,10 +66,10 @@ def preprocess(train_data_path, test_data_path):
         # 5.保存处理好的 训练 测试集合
         train_df = train_df.drop(['merged'], axis=1)
         test_df = test_df.drop(['merged'], axis=1)
-        train_df.to_csv(config.train_seg_path, index=False, header=False)
-        test_df.to_csv(config.test_seg_path, index=False, header=False)
+        train_df.to_csv(config.train_seg_path, index=False)
+        test_df.to_csv(config.test_seg_path, index=False)
         # 6. 保存合并数据
-        merged_df.to_csv(config.merger_seg_path, index=False, header=False)
+        merged_df.to_csv(config.merger_seg_path, index=False)
     return train_df, test_df
 
 if __name__ == '__main__':

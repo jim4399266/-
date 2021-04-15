@@ -24,7 +24,7 @@ def build_dataset(train_data_path, test_data_path):
     :param test_data_path: 测试集路径
     :return: 训练数据 测试数据  合并后的数据 
     """
-    test_df, train_df = preprocess(train_data_path, test_data_path)
+    train_df, test_df = preprocess(train_data_path, test_data_path)
     if os.path.exists(config.save_wv_model_path):
         wv_model = Word2Vec.load(config.save_wv_model_path)
     else:
@@ -37,14 +37,14 @@ def build_dataset(train_data_path, test_data_path):
 def generate_dataset_cache(train_df, test_df, wv_model):
     # 8. 分离数据和标签
     train_df['X'] = train_df[['Question', 'Dialogue']].apply(lambda x: ' '.join(x), axis=1)
-    test_df['X'] = test_df[['Question', 'Dialogue']].apply(lambda x: ' '.join(x), axis=1)
     train_df['X'].to_csv(config.train_x_seg_path, index=None, header=False)
     train_df['Report'].to_csv(config.train_y_seg_path, index=None, header=False)
+    test_df['X'] = test_df[['Question', 'Dialogue']].apply(lambda x: ' '.join(x), axis=1)
     test_df['X'].to_csv(config.val_x_seg_path, index=None, header=False)
     test_df['Report'].to_csv(config.val_y_seg_path, index=None, header=False)
     # 9. 填充开始结束符号,未知词填充 oov, 长度填充
     # 使用GenSim训练得出的vocab
-    vocab = wv_model.wv.vocab
+    vocab = wv_model.wv.key_to_index   # The 'vocab' attribute was removed from KeyedVector in Gensim 4.0.0.
     # 训练集X处理
     # 获取适当的最大长度
     train_x_max_len = get_max_len(train_df['X'])
@@ -83,10 +83,11 @@ def generate_dataset_cache(train_df, test_df, wv_model):
         os.makedirs(os.path.dirname(config.save_wv_model_path))
     wv_model.save(config.save_wv_model_path)
     print('finish retrain w2v model')
-    print('final w2v_model has vocabulary of ', len(wv_model.wv.vocab))
+    print('final w2v_model has vocabulary of ', len(wv_model.wv.key_to_index))
     # 12. 更新vocab
-    vocab = {word: index for index, word in enumerate(wv_model.wv.index2word)}
-    reverse_vocab = {index: word for index, word in enumerate(wv_model.wv.index2word)}
+    # The 'index2word' attribute has been replaced by 'index_to_key' since Gensim 4.0.0.
+    vocab = {word: index for index, word in enumerate(wv_model.wv.index_to_key)}
+    reverse_vocab = {index: word for index, word in enumerate(wv_model.wv.index_to_key)}
     # 保存字典
     save_dict(config.vocab_path, vocab)
     save_dict(config.reverse_vocab_path, reverse_vocab)
