@@ -18,12 +18,13 @@ target是二维张量(batch_size, K)， CrossEntropyLoss要求pred的shape是(ba
 **C是分类的数量，即vocab_size；K是网络的维度，即sen_len**。
 
 
-### 2、模型执行过程
-model_layers.py测试
+### 2、模型测试过程
+model_layers.py测试  
 ![model_layers.py测试](https://github.com/jim4399266/Text-Summarization/blob/main/week2/pic/model_layers.png)
 
-seq2seq_model.py测试
+seq2seq_model.py测试  
 ![seq2seq_model.py测试](https://github.com/jim4399266/Text-Summarization/blob/main/week2/pic/seq2seq_model.png)
-
-seq2seq_batcher.py测试
+ 
+seq2seq_batcher.py测试  
 ![seq2seq_batcher.py测试](https://github.com/jim4399266/Text-Summarization/blob/main/week2/pic/seq2seq_batcher.png)
+  
