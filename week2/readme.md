@@ -1,4 +1,8 @@
 ## 利用pytorch改写了整个模型。  
+完整项目代码（包括数据集、保存的模型）  
+链接：https://pan.baidu.com/s/1KGwkO14ZAqXNX7JYgEYQfQ   
+提取码：35kj   
+  
 ### 1、先讲讲在用pytorch遇到的几个坑：   
 （1）torch.tensor在赋值的时候需要使用clone()函数，如:
 ```python
@@ -29,6 +33,6 @@ seq2seq_batcher.py测试
 ![seq2seq_batcher.py测试](https://github.com/jim4399266/Text-Summarization/blob/main/week2/pic/seq2seq_batcher.png)
   
 ### 3、模型训练过程
-第一个epoch的loss已经很小了    
+第一个epoch的loss已经很小了，完成信息查看log.txt
 ![epoch1](https://github.com/jim4399266/Text-Summarization/blob/main/week2/pic/train_epoch1.png)  
   
