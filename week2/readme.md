@@ -28,3 +28,6 @@ seq2seq_model.py测试
 seq2seq_batcher.py测试  
 ![seq2seq_batcher.py测试](https://github.com/jim4399266/Text-Summarization/blob/main/week2/pic/seq2seq_batcher.png)
   
+### 3、模型训练过程
+![epoch1](https://github.com/jim4399266/Text-Summarization/blob/main/week2/pic/train_epoch1.png)
+第一个epoch的loss已经很小了  
