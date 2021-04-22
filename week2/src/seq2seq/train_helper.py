@@ -128,7 +128,7 @@ def train_step(model, enc_inp, dec_target, loss_function=None):
 def evaluate(model, val_dataloader, val_steps_per_epoch, loss_func, device='cpu'):
     model.zero_grad()
     model.eval()
-    print('Starting evaluate ...')
+    print('\nStarting evaluate ...')
     total_loss = 0.
     # enc_hidden = model.encoder.initialize_hidden_state()
     for (batch, (inputs, target)) in enumerate(val_dataloader.loader, start=1):
