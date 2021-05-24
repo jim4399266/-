@@ -1,0 +1,5 @@
+Homework-week4
+1. 参考模型和训练代码，继续完成week2的作业，保证可以训练seq2seq模型和inference摘要
+2. 补全 pgn_tf2.layers.py 中 Pointer 类的代码
+3. 补全 pgn_tf2.model.py 中 _calc_final_dist 的代码
+4. 运行 train.py 来使用 PGN 进行训练，对比和之前的训练结果
